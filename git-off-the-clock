@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import os
+import datetime as dt
+from datetime import timedelta as td
+
+def main():
+    os.system("cd $PWD")
+    gp = "/usr/bin/git"
+    hr = dt.datetime.now().hour
+    wd = dt.datetime.now().weekday
+
+    if hr >= 7 and hr <= 17 and \
+       wd != 5 or wd != 6:
+        nt = dt.datetime.today() - td(hours=13, minutes=30)
+        os.system(f"{gp} commit --amend --date=\"{nt.strftime('%c')}\" --no-edit")
+        os.system(f"GIT_COMMITTER_DATE=\"{nt.strftime('%c')}\" {gp} commit --amend --no-edit")
+
+if __name__ == '__main__':
+    main()
+
